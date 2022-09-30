@@ -7,7 +7,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/mdlayher/watchdog"
+	"github.com/kubaraczkowski/watchdog"
 )
 
 func TestIntegrationDevice(t *testing.T) {
