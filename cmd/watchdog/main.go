@@ -7,7 +7,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/mdlayher/watchdog"
+	"github.com/kubaraczkowski/watchdog"
 )
 
 func main() {
