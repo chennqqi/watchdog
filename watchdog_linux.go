@@ -14,7 +14,7 @@ import (
 // reference, see:
 // https://www.kernel.org/doc/html/latest/watchdog/watchdog-api.html.
 
-func open() (*Device, error) {
+func open(device_path string) (*Device, error) {
 	// TODO(mdlayher): determine the significance of the "/dev/watchdogN" nodes
 	// on Linux. It appears that my machine with only one device exposes both
 	// "/dev/watchdog" and "/dev/watchdog0".
@@ -22,7 +22,10 @@ func open() (*Device, error) {
 	// According to Terin, /dev/watchdog is an alias for /dev/watchdog0 on
 	// modern machines. It's possible there could be more than one device, so
 	// we'll eventually want to support that.
-	f, err := os.OpenFile("/dev/watchdog", os.O_WRONLY, 0)
+	if device_path == "" {
+		device_path = "/dev/watchdog"
+	}
+	f, err := os.OpenFile(device_path, os.O_WRONLY, 0)
 	if err != nil {
 		return nil, err
 	}
