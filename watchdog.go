@@ -21,7 +21,7 @@ type Device struct {
 //
 // Once a Device is opened, you must call Ping repeatedly to keep the system
 // from being rebooted. Call Close to disarm the watchdog device.
-func Open() (*Device, error) { return open() }
+func Open(device_path string) (*Device, error) { return open(device_path) }
 
 // Ping pings the watchdog device to keep the device from rebooting the system.
 func (d *Device) Ping() error { return d.ping() }
