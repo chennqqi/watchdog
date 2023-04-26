@@ -1,4 +1,4 @@
-module github.com/kubaraczkowski/watchdog
+module github.com/chennqqi/watchdog
 
 go 1.15
 

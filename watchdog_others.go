@@ -1,19 +1,23 @@
-//+build !linux
+//go:build !linux
+// +build !linux
 
 package watchdog
 
 import (
-	"fmt"
-	"os"
-	"runtime"
 	"time"
 )
 
-// errNotImplemented is a sentinel which indicates package watchdog does not
-// support this OS.
-var errNotImplemented = fmt.Errorf("watchdog: not implemented on %s: %w", runtime.GOOS, os.ErrNotExist)
+func open(device_path string) (*Device, error) { return nil, errNotImplemented }
 
-func open(device_path string) (*Device, error)  { return nil, errNotImplemented }
-func (*Device) ping() error                     { return errNotImplemented }
-func (*Device) timeout() (time.Duration, error) { return 0, errNotImplemented }
-func (*Device) close() error                    { return errNotImplemented }
+func (d *Device) setPretimeout(t time.Duration) error   { return errNotImplemented }
+func (d *Device) setTimeout(t time.Duration) error      { return errNotImplemented }
+func (d *Device) getBootStatus() (int, error)           { return 0, errNotImplemented }
+func (d *Device) getPretimeout() (time.Duration, error) { return 0, errNotImplemented }
+func (d *Device) getStatus() (int, error)               { return 0, errNotImplemented }
+func (d *Device) getSupport() (*WatchdogInfo, error)    { return nil, errNotImplemented }
+func (d *Device) getTemp() (int, error)                 { return 0, errNotImplemented }
+func (d *Device) getTimeLeft() (time.Duration, error)   { return 0, errNotImplemented }
+func (d *Device) getTimeout() (time.Duration, error)    { return 0, errNotImplemented }
+func (d *Device) keepAlive() error                      { return errNotImplemented }
+func (d *Device) setOptions(options WDT_OPTIONS) error  { return errNotImplemented }
+func (*Device) close() error                            { return errNotImplemented }

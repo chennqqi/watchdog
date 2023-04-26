@@ -7,11 +7,11 @@ import (
 	"log"
 	"time"
 
-	"github.com/kubaraczkowski/watchdog"
+	"github.com/chennqqi/watchdog"
 )
 
 func main() {
-	d, err := watchdog.Open()
+	d, err := watchdog.Open("/dev/watchdog")
 	if err != nil {
 		log.Fatalf("failed to open watchdog: %v", err)
 	}
@@ -30,7 +30,7 @@ func main() {
 	fmt.Printf("device: %q, timeout: %s\n", d.Identity, timeout)
 
 	for i := 0; i < 3; i++ {
-		if err := d.Ping(); err != nil {
+		if err := d.KeepAlive(); err != nil {
 			log.Fatalf("failed to ping watchdog: %v", err)
 		}
 
