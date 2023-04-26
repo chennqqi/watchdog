@@ -1,4 +1,5 @@
-//+build linux
+//go:build linux
+// +build linux
 
 package watchdog_test
 
@@ -10,11 +11,19 @@ import (
 	"github.com/kubaraczkowski/watchdog"
 )
 
+var watdogDevName = os.Getenv("DEV")
+
+func init() {
+	if watdogDevName == "" {
+		watdogDevName = "/dev/watchdog"
+	}
+}
+
 func TestIntegrationDevice(t *testing.T) {
 	// Since this test requires the presence of specific hardware, it's highly
 	// likely to not pass on regular machines. Make sure to check the errors
 	// and skip when necessary.
-	d, err := watchdog.Open()
+	d, err := watchdog.Open(watdogDevName)
 	if err != nil {
 		switch {
 		case errors.Is(err, os.ErrNotExist):
